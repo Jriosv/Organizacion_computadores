@@ -1,0 +1,11 @@
+CHIP PC {
+    IN in[16],load,inc,reset;
+    OUT out[16];
+
+    PARTS:
+    Inc16(in=outCycle, out=pc);
+    Mux16(a=outCycle, b=pc, sel=inc, out=w0);
+    Mux16(a=w0, b=in, sel=load, out=pc2);
+    Mux16(a=pc2, b=false, sel=reset, out=cout);
+    Register(in=cout, load=true, out=out, out=outCycle);
+}
